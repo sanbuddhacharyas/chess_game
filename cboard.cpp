@@ -1,8 +1,9 @@
 #include <assert.h>
 #include "CBoard.h"
+#include <iomanip>
 
 // Create nice colours in the console output
-#define TTY_YELLOW "[33m"
+#define TTY_YELLOW "[33m"
 #define TTY_BLUE   "[34m"
 #define TTY_NORM   "[0m"
 
@@ -855,12 +856,13 @@ bool CBoard::isKingInCheck() const
         if (m_board[i] == king)
         {
             kingSquare = i;
+            
             break;
         }
     }
 
     assert (kingSquare != 0); // The king MUST be somewhere
-
+     
     return isSquareThreatened(kingSquare);
 
 } // end of isKingInCheck
@@ -876,4 +878,6 @@ bool CBoard::isOtherKingInCheck() const
     ((CBoard *)this)->m_side_to_move = -m_side_to_move;
     return retval;
 } // end of isOtherKingInCheck
+
+
 

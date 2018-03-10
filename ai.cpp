@@ -83,7 +83,7 @@ CMove AI::find_best_move()
     CMoveList moves;
     m_board.find_legal_moves(moves);
 
-    std::cout << "info string " << moves.size() << " legal moves." << std::endl;
+   std::cout << "info string " << moves.size() << " legal moves." << std::endl;
 
     CMoveList best_moves; // Array of the (one or more) best moves so far
     int best_val = -999;

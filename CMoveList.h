@@ -41,9 +41,10 @@ class CMoveList
         }
 
         const CMove & operator [] (unsigned int ix) const { return m_moveList[ix]; }
-
+        
     private:
-        std::vector<CMove> m_moveList;//create of vector of object
+    	std::vector<CMove> m_moveList;
+        //create of vector of object
 
 }; /* end of CMoveList */
 

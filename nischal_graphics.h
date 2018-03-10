@@ -1,8 +1,9 @@
-#ifndef _nischal_graphics_
-#define _nischal_graphics_
 #include <SFML/Graphics.hpp>
-#include <time.h>
-
+#include<iostream>
+#include<windows.h>
+#include<stdlib.h>
+#include<string>
+#include <sstream>
 class Piece{
 protected:
     int xcor;
@@ -10,10 +11,15 @@ protected:
     int value;
     sf::Texture t;
     friend void setposition(int[8][8]);
-    friend void draw(sf::RenderWindow &);  //function to draw pieces
+    friend void draw(sf::RenderWindow &);  //function to draw pieces4
 
 public:
     sf::Sprite s;
+    void change_coordinate(int x, int y)
+    {
+        xcor=x;
+        ycor=y;
+    }
     void setSprite()
     {
         s = sf::Sprite(t);
@@ -152,6 +158,33 @@ public:
 }
 };
 
+int SCRWIDTH=700,SCRHEIGHT=700;
+
+class setpos
+{
+public:
+
+  void dis(int i,std::string c,int R,int G,int B,int A)
+    {
+
+        font1.loadFromFile("Font/Best.ttf");
+
+        temp[i].setString(c);
+        temp[i].setFont(font1);
+        temp[i].setCharacterSize(40);
+        temp[i].setPosition(sf::Vector2f(SCRWIDTH/3.0f,(SCRHEIGHT/4.0f)+i*80));
+        temp[i].setStyle(sf::Text::Italic);
+        temp[i].setOutlineThickness(2);
+        temp[i].setOutlineColor(sf::Color::Blue);
+        temp[i].setColor(sf::Color(R,G,B,A));
+    }
+
+    private:
+    sf::Font font1;
+
+    public:
+    sf::Text temp[10];
+}pos,loading1;
 
 
 
@@ -163,15 +196,17 @@ public:
     Rook wr[2]{1,1}, br[2]{0,0};
     Bishop wb[2]{1,1}, bb[2]{0,0};
     Pawn wp[8]{1,1,1,1,1,1,1,1}, bp[8]{0,0,0,0,0,0,0,0};
-    int rwi=0, rbi=0, pwi=0, pbi=0, hwi=0, hbi=0, bbi=0, bwi=0, qbi=0, qwi=0, kbi=0, kwi=0 ;  //index for no of count of diff pieces
+    int rwi, rbi, pwi, pbi, hwi, hbi, bbi, bwi, qbi, qwi, kbi, kwi ;  //index for no of count of diff pieces
 
-void setposition(int board1[8][8])           // sets value of coordinates of pieces according to board matrix
+void setposition(int board[8][8])           // sets value of coordinates of pieces according to board matrix
 {
+     rwi=0; rbi=0; pwi=0; pbi=0; hwi=0; hbi=0; bbi=0; bwi=0; qbi=0; qwi=0; kbi=0; kwi=0 ;
+   // std::cout<<"display"<<std::endl;
    for(int i=0; i<8;i++)
     {
         for(int j=0; j<8;j++)
         {
-            switch(board1[i][j]){
+            switch(board[i][j]){
             case 1:
                 wp[pwi].xcor=j;
                 wp[pwi].ycor=i;
@@ -254,7 +289,43 @@ void draw(sf::RenderWindow &window)            // places required piece accordin
     for(int i=0; i<bbi; i++) window.draw(bb[i].s);
 }
 
+void place()
+{
+    bq.place();
+    wq.place();
+    wk.place();
+    bk.place();
+    for(int i=0; i<8; i++)
+    {
+        wp[i].place();
+        bp[i].place();
+    }
+    for(int i=0; i<2; i++)
+    {
+        wr[i].place();
+        br[i].place();
+        wh[i].place();
+        bh[i].place();
+        wb[i].place();
+        bb[i].place();
+    }
 
-      
 
-#endif
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
