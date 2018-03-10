@@ -69,7 +69,6 @@ class CBoard
         bool isKingInCheck() const; //Check weather our king is check or not
         bool isOtherKingInCheck() const; //check weather others kings are in check or not
         friend std::ostream& operator <<(std::ostream &os, const CBoard &rhs);
-        int m_side_to_move;
        
         
     private:
@@ -77,7 +76,7 @@ class CBoard
         void swap_sides() {m_side_to_move = -m_side_to_move;}
 
         std::vector<int8_t>   m_board;//arry of integer is made
-        //int m_side_to_move;
+        int m_side_to_move;
         int m_material;
 
 }; // end of class CBoard

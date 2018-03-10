@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include<iostream>
 #include<windows.h>
 #include<stdlib.h>
@@ -167,12 +168,12 @@ public:
   void dis(int i,std::string c,int R,int G,int B,int A)
     {
 
-        font1.loadFromFile("Font/Best.ttf");
+        font1.loadFromFile("Best.ttf");
 
         temp[i].setString(c);
         temp[i].setFont(font1);
         temp[i].setCharacterSize(40);
-        temp[i].setPosition(sf::Vector2f(SCRWIDTH/3.0f,(SCRHEIGHT/4.0f)+i*80));
+        temp[i].setPosition(sf::Vector2f(SCRWIDTH/3.0f,(SCRHEIGHT/4.0f)+i*60));
         temp[i].setStyle(sf::Text::Italic);
         temp[i].setOutlineThickness(2);
         temp[i].setOutlineColor(sf::Color::Blue);
@@ -184,7 +185,8 @@ public:
 
     public:
     sf::Text temp[10];
-}pos,loading1;
+}pos11,loading1;
+
 
 
 
