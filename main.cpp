@@ -70,19 +70,16 @@ void mouse(T &obj, sf::Event &event, sf::RenderWindow &window, sf::Sprite &blue,
                             
                         			clicked=b_c.array_temp[prepsy][prepsx];
                         			cout<<"clicked:"<<clicked<<endl;
-                        			music[2].play();
+                        			music[7].play();
                         			CMoveList moves;
             						board.find_legal_moves(moves);
             						k=0;
                                 for(int i=0;i<moves.size();i++)
                                 {
 								    b_c.tukrauna(moves[i].m_from);
-								   // cout<<b_c.x_tukra<<" "<<b_c.y_tukra<<endl;
 								    if((b_c.x_tukra==prepsx)&&(b_c.y_tukra==prepsy))
 								    {
-								    //	cout<<b_c.x_tukra<<" "<<b_c.y_tukra<<endl;
 								    	b_c.tukrauna(moves[i].m_to);
-								    	
 								    	green[k].setPosition(55+(b_c.x_tukra)*73.625,55+(b_c.y_tukra)*73.625);
 								    	k++;
 								    	gree=true;
@@ -103,7 +100,7 @@ void mouse(T &obj, sf::Event &event, sf::RenderWindow &window, sf::Sprite &blue,
                         str3=b_c.converter(8-prepsy,prepsx+1);
                         newposx=(posx-55)/73.625;
                         newposy=(posy-55)/73.625;
-                        music[2].play();
+                        music[7].play();
                         cout<<newposx<<" "<<newposy<<endl;
                         
                         obj.Piece::change_coordinate(newposx, newposy);
@@ -115,8 +112,7 @@ void mouse(T &obj, sf::Event &event, sf::RenderWindow &window, sf::Sprite &blue,
 				            str1="move ";
         				    str.append(str1);
 							str.append(str3);
-							str.append(str2);//b_c.converter(newposy+1,newposx+1);
-						//	str="move a2a4";
+							str.append(str2);
         				    cout<<str<<endl;
 				            if (move.FromString(str.c_str()+5) == NULL)
 				            {
@@ -148,9 +144,17 @@ void mouse(T &obj, sf::Event &event, sf::RenderWindow &window, sf::Sprite &blue,
 				                setposition(b_c.array_temp);
 				                place();
 				                if(player_turn)
-				                player_turn=false;
+				                {
+				                	player_turn=false;
+				                	cout<<"Black Turn"<<endl;
+								}				                
 				                else
-				                player_turn=true;
+				                {
+				                	player_turn=true;
+				                	cout<<"white Turn"<<endl;
+								}
+				                
+				                
                                 }
                                 if(check_other)
 				                {
@@ -173,7 +177,7 @@ void mouse(T &obj, sf::Event &event, sf::RenderWindow &window, sf::Sprite &blue,
 				                	redb=true;
 				                	music[5].play();
 								   }
-				                  //  cout<<b_c.pos_i<<" "<<b_c.pos_j<<endl;
+				                
 				                    
 								}
 				            }
@@ -227,7 +231,7 @@ int main()
    	sf::IntRect crop(0, 0, 700, 40);
    	sf::Sprite sprite12(lex,crop),s(tex);
 
-  	sf::Music music[7];
+  	sf::Music music[8];
 	  music[0].openFromFile("Sounds/theme.ogg");
 	  music[1].openFromFile("Sounds/menu.wav");
 	  music[2].openFromFile("Sounds/click.wav");
@@ -235,6 +239,7 @@ int main()
 	  music[4].openFromFile("Sounds/eating.wav");
 	  music[5].openFromFile("Sounds/checkmate.wav");
 	  music[6].openFromFile("Sounds/exit.wav");
+	  music[7].openFromFile("Sounds/pieces_click.wav");
 	pos11.dis(0,"Play as White",0,255,0,255);
 	pos11.dis(1,"Multi Player",0,255,0,255);
 	pos11.dis(2,"Credit",0,255,0,255);
@@ -428,14 +433,6 @@ while (windownew.isOpen())
     board_converter b_c;
     setposition(b_c.array_temp);
     place();
-    for(int i=0;i<8;i++)
-	{
-		for(int j=0;j<8;j++)
-		{
-			cout<<", "<<b_c.array_temp[i][j];
-		}
-		cout<<endl;
-   }
     sf::Texture t;
     t.loadFromFile("images/gameboard.jpg");  // loads board
     sf::Sprite sboard(t);
@@ -458,8 +455,7 @@ while (windownew.isOpen())
     sf::RenderWindow window(sf::VideoMode(700, 700), "AI Chess");
     window.setFramerateLimit(30);
     sf::Event event;
-     cout<<"I am setting done"<<endl;
-     int aaa=0,bbb=0;
+    int aaa=0,bbb=0;
      
     while (window.isOpen())
     {  
@@ -489,90 +485,67 @@ while (windownew.isOpen())
 				
                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
        				{				
-		                 CMove best_move = ai.find_best_move();
+		                CMove best_move = ai.find_best_move();
 
-				         cout << "bestmove " << best_move << endl;
-				         board.make_move(best_move); 
-				         b_c.san_to_nischal(best_move.m_from,best_move.m_to);
-				         setposition(b_c.array_temp);
-				         place();
-				         redb=false;
-				           bool check = board.isOtherKingInCheck();
-				           bool check_other = board.isKingInCheck();
-				               // board.undo_move(move);
-				               
-				                if (check)
-				                {
-				                    cout << "Black king is in check. Play another move." << endl;  
-				                    //b_c.position_check(-10);
-				                   // cout<<b_c.pos_i<<" "<<b_c.pos_j<<endl;
-				                }
-				                if(check_other)
-				                {
-				                	cout << "White King is  in CHECK" << endl;  
-									b_c.position_check(10);
-									red.setPosition(55+b_c.pos_i*73.625,55+b_c.pos_j*73.625 );
-				                    //cout<<b_c.pos_i<<" "<<b_c.pos_j<<endl;
-				                    redb=true;
-				                    string kk;
-				                    CMoveList movesss;
-				                    board.find_legal_moves(movesss);
-				                    
-				                   // cout<<board.	
-								}
-								
+				        cout << "bestmove " << best_move << endl;
+				        board.make_move(best_move); 
+				        b_c.san_to_nischal(best_move.m_from,best_move.m_to);
+				        setposition(b_c.array_temp);
+				        place();
+				        redb=false;
+				    	bool check = board.isOtherKingInCheck();
+				        bool check_other = board.isKingInCheck();
+				             			               
+				        if (check)
+				        {
+				            cout << "Black king is in check. Play another move." << endl;  
+				                
+				        }
+				        if(check_other)
+				        {
+				            cout << "White King is  in CHECK" << endl;  
+							b_c.position_check(10);
+							red.setPosition(55+b_c.pos_i*73.625,55+b_c.pos_j*73.625 );
+				            redb=true;
+				            string kk;
+				            CMoveList movesss;
+				            board.find_legal_moves(movesss);                         	
+						}			
 				         
        			    }
             	}
-
-            }
-
-//             if(aaa==0)
-//             {
-//             	cout<<"Black Turn"
-//			 }
-            
+            }           
         }
         if(!player_turn)
         { 
-           int aaa=0;
-        	
+ 	
            if(multiplayer_mode)
            {
-			//cout<<"Multiplayer_mode"<<endl;
-		
-			while(window.pollEvent(event))
-            {
-                if( event.type == sf::Event::Closed )
-                window.close();
-                for(int i=0; i<pbi; i++)
-                mouse(bp[i], event, window,blue, player_turn, blu, fpresspb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                for(int i=0; i<rbi; i++)
-                mouse(br[i], event, window,blue, player_turn, blu, fpressrb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                for(int i=0; i<hbi; i++)
-                mouse(bh[i], event, window,blue, player_turn, blu, fpresshb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                for(int i=0; i<bbi; i++)
-                mouse(bb[i], event, window,blue, player_turn, blu, fpressbb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                mouse(bq, event, window,blue, player_turn, blu, fpressqb, pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                mouse(bk, event, window,blue, player_turn, blu, fpresskb, pos.x, pos.y,b_c,board,red,redb,green,gree,music);
-                  
-            }
-		   }
+				while(window.pollEvent(event))
+	            {
+	                if( event.type == sf::Event::Closed )
+	                window.close();
+	                for(int i=0; i<pbi; i++)
+	                mouse(bp[i], event, window,blue, player_turn, blu, fpresspb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                for(int i=0; i<rbi; i++)
+	                mouse(br[i], event, window,blue, player_turn, blu, fpressrb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                for(int i=0; i<hbi; i++)
+	                mouse(bh[i], event, window,blue, player_turn, blu, fpresshb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                for(int i=0; i<bbi; i++)
+	                mouse(bb[i], event, window,blue, player_turn, blu, fpressbb[i], pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                mouse(bq, event, window,blue, player_turn, blu, fpressqb, pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                mouse(bk, event, window,blue, player_turn, blu, fpresskb, pos.x, pos.y,b_c,board,red,redb,green,gree,music);
+	                  
+	            }
+		   }//Multiplayer_mode end
             else
-            {
+        	{
 			
             in++;
             player_turn = true;
-            cout<<"Black to move"<<endl;
-           }
-           if(aaa=0)
-           {
-           	cout<<"Black Turn"<<endl;
-           	aaa=1;
-		   }
-           
-     
-        }
+            cout<<"Black to move:Press Space"<<endl;
+           }    
+        }//(!player turn end)
         window.clear();
         window.draw(sboard);
         if(blu)
@@ -679,8 +652,7 @@ void board_converter::tukrauna(int mmm )
 {
 	y_tukra=(9-(mmm/10));
 	x_tukra=((mmm%10)-1);
-//	cout<<x_tukra<<"vv "<<y_tukra<<endl;
-	}
+}
 
 
 

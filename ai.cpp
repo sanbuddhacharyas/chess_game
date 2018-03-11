@@ -118,6 +118,6 @@ CMove AI::find_best_move()
         exit(1);
     }
 
-    return best_moves[rand() % best_moves.size()];
+    return best_moves[rand() % best_moves.size()]; //Random best moves in range % means range upto best_move
 } // end of find_best_move
 

@@ -202,8 +202,7 @@ public:
 
 void setposition(int board[8][8])           // sets value of coordinates of pieces according to board matrix
 {
-     rwi=0; rbi=0; pwi=0; pbi=0; hwi=0; hbi=0; bbi=0; bwi=0; qbi=0; qwi=0; kbi=0; kwi=0 ;
-   // std::cout<<"display"<<std::endl;
+    rwi=0; rbi=0; pwi=0; pbi=0; hwi=0; hbi=0; bbi=0; bwi=0; qbi=0; qwi=0; kbi=0; kwi=0 ;
    for(int i=0; i<8;i++)
     {
         for(int j=0; j<8;j++)
