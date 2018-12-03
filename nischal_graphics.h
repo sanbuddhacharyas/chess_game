@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include<iostream>
-#include<windows.h>
 #include<stdlib.h>
 #include<string>
 #include <sstream>
+
 class Piece{
 protected:
     int xcor;
@@ -39,12 +39,12 @@ public:
     Horse(int color)
     {
         if(color == 1){
-        t.loadFromFile("images/wknight.png");
+        t.loadFromFile("images/wknight.PNG");
         value = 4;
         setSprite();
         }
         if(color == 0){
-        t.loadFromFile("images/bknight.png");
+        t.loadFromFile("images/bknight.PNG");
         value = -4;
         setSprite();
         }
@@ -60,12 +60,12 @@ public:
     King(int color)
     {
         if(color == 1){
-        t.loadFromFile("images/wking.png");
+        t.loadFromFile("images/wking.PNG");
         value = 10;
         setSprite();
         }
         if(color == 0){
-        t.loadFromFile("images/bking.png");
+        t.loadFromFile("images/bking.PNG");
         value = -10;
         setSprite();
         }
@@ -81,12 +81,12 @@ public:
     Queen(int color)
     {
         if(color == 1){
-        t.loadFromFile("images/wqueen.png");
+        t.loadFromFile("images/wqueen.PNG");
         value = 9;
         setSprite();
         }
         if(color == 0){
-        t.loadFromFile("images/bqueen.png");
+        t.loadFromFile("images/bqueen.PNG");
         value = -9;
         setSprite();
         }
@@ -102,12 +102,12 @@ public:
     Rook(int color)
     {
         if(color == 1){
-        t.loadFromFile("images/wrook.png");
+        t.loadFromFile("images/wrook.PNG");
         value = 5;
         setSprite();
         }
         if(color == 0){
-        t.loadFromFile("images/brook.png");
+        t.loadFromFile("images/brook.PNG");
         value = -5;
         setSprite();
         }
@@ -123,12 +123,12 @@ public:
     Bishop(int color)
     {
         if(color == 1){
-        t.loadFromFile("images/wbishop.png");
+        t.loadFromFile("images/wbishop.PNG");
         value = 3;
         setSprite();
         }
         if(color == 0){
-        t.loadFromFile("images/bbishop1.png");
+        t.loadFromFile("images/bbishop.PNG");
         value = -3;
         setSprite();
         }
@@ -144,12 +144,12 @@ public:
     Pawn(int color)
     {
         if(color==1){
-        t.loadFromFile("images/wpawn.png");
+        t.loadFromFile("images/wpawn.PNG");
         value = 1;
         setSprite();
         }
         if(color==0){
-        t.loadFromFile("images/bpawn.png");
+        t.loadFromFile("images/bpawn.PNG");
         value = -1;
         setSprite();
         }
@@ -168,7 +168,7 @@ public:
   void dis(int i,std::string c,int R,int G,int B,int A)
     {
 
-        font1.loadFromFile("Best.ttf");
+        font1.loadFromFile("Best.TTF");
 
         temp[i].setString(c);
         temp[i].setFont(font1);
@@ -177,7 +177,7 @@ public:
         temp[i].setStyle(sf::Text::Italic);
         temp[i].setOutlineThickness(2);
         temp[i].setOutlineColor(sf::Color::Blue);
-        temp[i].setColor(sf::Color(R,G,B,A));
+        temp[i].setFillColor(sf::Color(R,G,B,A));
     }
 
     private:

@@ -70,7 +70,7 @@ int AI::search(int alpha, int beta, int level)
     return best_val;
 } // end of int search
 
-/***************************************************************
+/*************************************************....3**************
  * find_best_move
  *
  * This is the main AI.

@@ -27,7 +27,7 @@ class CMoveList
 
         void push_back(const CMove& move)
         {
-            m_moveList.push_back(move);//appending of object invectorm_moveList
+            m_moveList.push_back(move);//appending of object in vector m_moveList
         }
 
         void clear()
